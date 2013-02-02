@@ -1,0 +1,5 @@
+title = """A test file.""" 
+text = """A file to test file_parser.py \n
+Created on the 18/1/2013."""
+
+# A comment. Just that.
