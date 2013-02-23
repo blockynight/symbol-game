@@ -1,5 +1,6 @@
 title = """A test file.""" 
-text = """A file to test file_parser.py \n
-Created on the 18/1/2013."""
+text = """A file to test file_parser.py
+Created on the 18/1/2013.
+For test purposes."""
 
 # A comment. Just that.
