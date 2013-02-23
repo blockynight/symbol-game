@@ -8,6 +8,18 @@ class Parser(object):
         txt = self.open_file(FILE, M)     # storage must be a dictionary.
         if (None == txt): self.error(txt, "No such file exists.")
 
+        if M in ["r+", "w", "w+"]: self.write_file(txt, storage)
+
+        else: self.read_file(txt, storage)
+
+
+    def write_file(self, txt, storage):
+        
+        if (0 == len(storage)): self.error(txt, "No changes to be writen.")
+
+        
+    def read_file(self, txt, storage):
+
         while True:
             
             print "DEBUG: loop1"

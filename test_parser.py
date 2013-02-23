@@ -1,60 +1,88 @@
 # A file for testing that the file_parser.py file runs as expected.
 
 from file_parser import *
-import sys 
+import sys                   # Test options -f for full, -i for individual func tests.
+
+def print_list(items):
+
+    for item in items:
+        print item
+
+
+if 1 == len(sys.argv): 
+    print "USAGE: Script -Options"
+    sys.exit(1)
 
 storage = {}
 fili = "levels/test.txt"
 m = "r"
 storage = {}
 p = Parser()
-p.parse(fili, m, storage)
 
-print storage["title"]
-print storage["text"]
-print storage
+if "-f" == sys.argv[1]:
 
+    p.parse(fili, m, storage)
+
+    print storage["title"]
+    print storage["text"]
+    print storage
+
+   # print "\n\n"
 
 
 #======================================================#
 # Testing individual functions.
 
-print "\n\n"
+elif "-i" == sys.argv[1]:
+    
+    # cut_line
+    try:
+        f = p.open_file(fili, m)
+        l = p.get_line(f)
+        ls = l[2:]
+        ln = p.cut_line(" ".join(ls), '"""')
+        ln2 = p.cut_line(ln, '"""')
+        storage[l[0]] = ln2
+        f.close()
 
-# Cut_line
-f = p.open_file(fili, m)
-l = p.get_line(f)
-print l
-ls = l[2:]
-ln = p.cut_line(" ".join(ls), '"""')
-print ln
-ln2 = p.cut_line(ln, '"""')
-print ln2
-storage[l[0]] = ln2
-print storage                              # cut_line func works.
+        print "cut_line [True]"
 
-print ""
+    except:
+        print_list(["cut_line [False]", f, l, ls, ln, ln2, storage])
 
-# Find_string 
-f.seek(0, 0)
-l = p.get_line(f)
-print l
-ls = l[2:]
-ln = p.find_string(" ".join(ls), '"""', True)
-print ln
-ln2 = p.find_string(ln, '"""', True)
-print ln2
-storage[l[0]] = ln2
-print storage                              # find_string func works.
+    print ""
 
-print ""
+    # find_string 
+    try:
+        f = p.open_file(fili, m)
+        l = p.get_line(f)
+        ls = l[2:]
+        ln = p.find_string(" ".join(ls), '"""', True)
+        ln2 = p.find_string(ln, '"""', True)
+        storage[l[0]] = ln2
+        f.close()
 
-# Find_set
-f.seek(0, 0)
-l = p.get_line(f)
-print l
-ls = l[2:]
-ln = p.find_set(f, ls, '"""')
-print ln
-storage[l[0]] = ln
-print storage                              # find_set func works
+        print "find_string [True]"
+
+    except:
+        print_list(["find_string [False]", f, l, ls, ln, ln2, storage])
+
+    print ""
+
+    # Find_set
+    try:
+        print "DEBUG: ???"
+        f = open_file(fili, m)
+        if None == f: print "DEBUG: Fail."
+        print "DEBUG: GOT."
+        l = p.get_line(f)
+        ls = l[2:]
+        print "DEBUG: Here"
+        ln = p.find_set(f, ls, '"""')
+        storage[l[0]] = ln
+        f.close()
+
+        print "find_set [True]"
+
+    except:
+        print_list(["find_set [False]", f, l, ls, ln, ln2, storage])
