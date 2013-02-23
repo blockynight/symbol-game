@@ -1,0 +1,4 @@
+0.01 : Rewrote file_parser.py, it can now read text files if they are formated correctly.
+       The ability to write to text files still needs to be added.
+       Updated test_parser.py with some testing of individual functions.
+       It needs more work and a clean up.
