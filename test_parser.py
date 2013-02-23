@@ -1,6 +1,6 @@
 # A file for testing that the file_parser.py file runs as expected.
 
-from file_parse import *
+from file_parser import *
 import sys 
 
 storage = {}
