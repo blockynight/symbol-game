@@ -18,6 +18,8 @@ class Parser(object):
         if (0 == len(storage)): self.error(txt, "No changes to be writen.")
 
         
+
+        
     def read_file(self, txt, storage):
 
         while True:

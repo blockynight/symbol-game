@@ -3,6 +3,7 @@
 from file_parser import *
 import sys                   # Test options -f for full, -i for individual func tests.
 
+
 def print_list(items):
 
     for item in items:
@@ -10,7 +11,7 @@ def print_list(items):
 
 
 if 1 == len(sys.argv): 
-    print "USAGE: Script -Options"
+    print "USAGE: Script [Options] eg -f or -i"
     sys.exit(1)
 
 storage = {}
@@ -71,13 +72,9 @@ elif "-i" == sys.argv[1]:
 
     # Find_set
     try:
-        print "DEBUG: ???"
         f = open_file(fili, m)
-        if None == f: print "DEBUG: Fail."
-        print "DEBUG: GOT."
         l = p.get_line(f)
         ls = l[2:]
-        print "DEBUG: Here"
         ln = p.find_set(f, ls, '"""')
         storage[l[0]] = ln
         f.close()
@@ -86,3 +83,6 @@ elif "-i" == sys.argv[1]:
 
     except:
         print_list(["find_set [False]", f, l, ls, ln, ln2, storage])
+        error_info = sys.exc_info()
+        print error_info[0]
+        print error_info[1]
