@@ -1,0 +1,5 @@
+My text parser library should be as simple and easy to modify as possible.
+When initialiesing the class for this library you should pass in a number of
+rules, such as if a var in the text file is found to be a string like
+"True" then it should be set to True, the boolean value instead. 
+Unittests should be written.
