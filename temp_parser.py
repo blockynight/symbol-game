@@ -11,7 +11,9 @@ class FileParser(object):
 
     def read_file(self, input_file, storage):
 
-        pass
+        file_obj = self.setup(input_file, "r", False)
+        
+        file_obj.close()
 
 
     def write_file(self, input_file, newfile=False, storage):
@@ -30,9 +32,24 @@ class FileParser(object):
 
 
     def set_up(self, input_file, mode, newfile):
-    # check if file is locked check.
-        file_obj = self.open_file(input_file, mode)
-        if (None == file_obj): self.error(None, "Couldn't open file.")
+    
+        test_exists = self.open_file(input_file, "r")
+
+        if (None == test_exists and True == newfile):
+            file_obj = self.open_file(input_file, "w")    
+            
+            if (None == file_obj): 
+                self.error(file_obj, "File failed to be created or other IO error.")
+
+        elif (None == test_exists and False == newfile):
+            self.error(file_obj, "File doesn't exist.")
+
+        else:
+            test_exists.close()
+            file_obj = self.open_file(input_file, mode)
+            
+            if (None == file_obj): 
+                self.error(file_obj, "An IO error, but %s exists." % input_file)
 
         return file_obj
 
